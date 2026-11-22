@@ -1,3 +1,4 @@
+import { CURRENCY_SYMBOL } from "../constants/config";
 export const formatTime = (totalSeconds) =>{
     const minutes = Math.floor(totalSeconds/60);
     const seconds = totalSeconds % 60;
@@ -11,3 +12,13 @@ export const getInitials = (name = '') => {
     const last = parts.length>1 ? parts[parts.length - 1][0] : '';
     return (first + last).toUpperCase();
 }
+
+export const discountPercent = (price,oldPrice) =>{
+    if(!oldPrice || oldPrice<= price) return 0;
+    return Math.round(((oldPrice-price)/oldPrice)*100);
+};
+
+export const formatCurrency = (amount) =>{
+    const withCommas = String(amount).replace(/\B(?=(\d{3}+(?!\d)))/g,',');
+    return `${CURRENCY_SYMBOL}${withCommas}`;
+};
